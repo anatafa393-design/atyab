@@ -197,6 +197,14 @@ img {
   display: block;
 }
 
+.pill-toggle-btn .icon-plus {
+  display: block;
+}
+
+.pill-toggle-btn .icon-hamburger {
+  display: none;
+}
+
 .pill-toggle-btn:hover {
   background: var(--orange-500);
   transform: scale(1.08);
@@ -2861,10 +2869,91 @@ select.form-control {
 
 @media (max-width: 768px) {
   .header-inner {
-    padding: 0 1.2rem;
+    padding: 0 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .header-pill {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    min-width: 108px !important;
+    max-width: none !important;
+    height: 48px !important;
+    padding: 4px 6px 4px 14px !important;
+    border-radius: var(--radius-pill) !important;
+    background: #ffffff !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.22) !important;
+    gap: 0.75rem !important;
+    overflow: visible !important;
+  }
+  .site-header.scrolled .header-pill,
+  .site-header.scrolled .header-pill:not(:hover):not(.is-expanded) {
+    min-width: 108px !important;
+    height: 48px !important;
+    padding: 4px 6px 4px 14px !important;
+    gap: 0.75rem !important;
+  }
+  .pill-logo {
+    display: flex;
+    align-items: center;
+  }
+  .pill-logo img {
+    height: 28px !important;
+    width: auto !important;
+  }
+  .pill-nav {
+    display: none !important;
+  }
+  .pill-toggle-btn {
+    display: inline-flex !important;
+    width: 36px !important;
+    height: 36px !important;
+    border-radius: 50% !important;
+    background: #141d2f !important;
+    color: #ffffff !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25) !important;
+    cursor: pointer !important;
+  }
+  .site-header.scrolled .pill-toggle-btn,
+  .site-header.scrolled .header-pill:hover .pill-toggle-btn {
+    width: 36px !important;
+    max-width: 36px !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    display: inline-flex !important;
+  }
+  .pill-toggle-btn .icon-plus {
+    display: none !important;
+  }
+  .pill-toggle-btn .icon-hamburger {
+    display: block !important;
   }
   .header-left {
-    gap: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0;
+  }
+  .header-left .btn-pill-orange {
+    padding: 0.62rem 1.5rem !important;
+    font-size: 0.95rem !important;
+    font-weight: 700 !important;
+    background: #ed6e0f !important;
+    color: #ffffff !important;
+    border-radius: var(--radius-pill) !important;
+    box-shadow: 0 4px 16px rgba(237, 110, 15, 0.35) !important;
+  }
+  .mobile-menu-trigger {
+    display: none !important;
   }
   .site-header {
     top: 0.85rem;
@@ -2892,26 +2981,21 @@ select.form-control {
     padding: 0 0.8rem;
   }
   .header-pill {
-    min-width: 104px;
-    height: 48px;
-    padding: 0.3rem 0.8rem 0.3rem 0.45rem;
-    gap: 0.6rem;
+    min-width: 104px !important;
+    height: 46px !important;
+    padding: 3px 5px 3px 12px !important;
+    gap: 0.6rem !important;
   }
   .pill-logo img {
-    height: 28px;
+    height: 26px !important;
   }
   .pill-toggle-btn {
-    width: 34px;
-    height: 34px;
+    width: 34px !important;
+    height: 34px !important;
   }
   .header-left .btn-pill-orange {
-    padding: 0.5rem 1rem;
-    font-size: 0.85rem;
-    gap: 0.4rem;
-  }
-  .mobile-menu-trigger {
-    width: 40px;
-    height: 40px;
+    padding: 0.55rem 1.3rem !important;
+    font-size: 0.9rem !important;
   }
   .contact-form-card,
   .official-info-card,

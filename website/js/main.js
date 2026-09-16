@@ -26,24 +26,36 @@ function initHeaderScroll() {
       header.classList.add('scrolled');
     } else {
       header.classList.remove('scrolled');
-      if (pill) pill.classList.remove('is-expanded');
+      if (pill && window.innerWidth > 768) pill.classList.remove('is-expanded');
     }
   });
 
   if (toggleBtn && pill) {
     toggleBtn.addEventListener('click', (e) => {
       e.stopPropagation();
-      pill.classList.toggle('is-expanded');
+      if (window.innerWidth <= 768) {
+        const drawer = document.querySelector('.mobile-nav-drawer');
+        const overlay = document.querySelector('.drawer-overlay');
+        if (drawer && overlay) {
+          drawer.classList.add('open');
+          overlay.classList.add('active');
+          document.body.style.overflow = 'hidden';
+        }
+      } else {
+        pill.classList.toggle('is-expanded');
+      }
     });
 
     document.addEventListener('click', (e) => {
-      if (!pill.contains(e.target)) {
+      if (window.innerWidth > 768 && !pill.contains(e.target)) {
         pill.classList.remove('is-expanded');
       }
     });
 
     pill.addEventListener('mouseleave', () => {
-      pill.classList.remove('is-expanded');
+      if (window.innerWidth > 768) {
+        pill.classList.remove('is-expanded');
+      }
     });
   }
 }
@@ -55,21 +67,21 @@ function initMobileDrawer() {
   const closeBtn = document.querySelector('.mobile-drawer-close');
   const overlay = document.querySelector('.drawer-overlay');
   
-  if (!trigger || !drawer || !overlay) return;
+  if (!drawer || !overlay) return;
   
   const openDrawer = () => {
     drawer.classList.add('open');
     overlay.classList.add('active');
     document.body.style.overflow = 'hidden';
   };
-  
+
   const closeDrawer = () => {
     drawer.classList.remove('open');
     overlay.classList.remove('active');
     document.body.style.overflow = '';
   };
   
-  trigger.addEventListener('click', openDrawer);
+  if (trigger) trigger.addEventListener('click', openDrawer);
   if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
   overlay.addEventListener('click', closeDrawer);
 }

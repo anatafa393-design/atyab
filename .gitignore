@@ -1,0 +1,17 @@
+# Ignore raw assets and non-website files
+*.pdf
+*.ai
+*.docx
+*.ps1
+*.py
+*.txt
+كل صور المشاريع/
+هوية بصرية/
+الخريطه.png
+الايقونه للوجو.png
+السجل التجاري.png
+العنوان الوطني.png
+لوجو افقي.png
+لوجو الفوتر.png
+لوجو عرضي.png
+.tempmediaStorage/

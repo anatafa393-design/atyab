@@ -326,9 +326,9 @@ function initHeroTextRotator() {
 
   const phrases = [
     "مؤسسة أطياف البياض للمقاولات العامة",
-    "إتقانٌ يُبنى عليه عبر أرجاء المملكة",
-    "رواد التشييد المتكامل والأعمال الكهروميكانيكية",
-    "نبني إرثاً هندسياً يواكب رؤية السعودية 2030"
+    "تنفيذ الهياكل الخرسانية والمباني المتكاملة بالرياض",
+    "مقاولات عامة معتمدة وفق كود البناء السعودي SBC",
+    "إشراف هندسي ميداني وضمانات إنشائية تصل إلى 10 سنوات"
   ];
 
   let currentIndex = 0;
@@ -648,7 +648,7 @@ function openCorporateModal(title, contentHtml) {
       <div class="site-modal-dialog">
         <div class="site-modal-header">
           <div class="site-modal-title">
-            <span class="polygon-accent" style="width: 20px; height: 20px;"></span>
+            
             <span id="modalHeaderTitle"></span>
           </div>
           <button type="button" class="site-modal-close" aria-label="إغلاق">&times;</button>

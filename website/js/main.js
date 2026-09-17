@@ -1,6 +1,6 @@
 /* ==========================================================================
-   Atyaf Al-Bayad - Master Interactive Engine
-   Nesma-Style Dynamic Map State Machine, Camera Pan/Zoom, 
+   Atyaf Al-Bayad - Site Interactive Engine
+   Atyaf Al-Bayad Architecture Dynamic Map State Machine, Camera Pan/Zoom, 
    White Project Card Carousel, and Form Handlers.
    ========================================================================== */
 
@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
 });
 
-/* Header Scroll Behavior & Collapsible Pill (Nesma Model) */
+/* Header Scroll Behavior & Collapsible Pill (Atyaf Al-Bayad Architecture) */
 function initHeaderScroll() {
   const header = document.querySelector('.site-header');
   const pill = document.querySelector('.header-pill');
@@ -114,7 +114,7 @@ function initOdometerCounters() {
     });
   }, { threshold: 0.3 });
   
-  const section = document.querySelector('.facts-section-nesma');
+  const section = document.querySelector('.facts-section-bar');
   if (section) observer.observe(section);
 }
 
@@ -148,99 +148,29 @@ function initQuoteForm() {
     const district = document.getElementById('qDistrict').value.trim();
     const notes = document.getElementById('qNotes').value.trim();
     
-    let msg = `*طلب عرض سعر معتمد - أطياف البياض*%0A%0A`;
-    msg += `• *الاسم الكريم:* ${name}%0A`;
-    msg += `• *رقم الجوال:* ${phone}%0A`;
-    msg += `• *نوع المشروع:* ${type}%0A`;
-    if (area) msg += `• *المساحة التقديرية:* ${area} م²%0A`;
-    if (district) msg += `• *الحي / الموقع:* ${district}%0A`;
-    if (notes) msg += `• *تفاصيل إضافية:* ${notes}%0A`;
+    let rawText = `*طلب عرض سعر معتمد - أطياف البياض*\n\n`;
+    rawText += `• *الاسم الكريم:* ${name}\n`;
+    rawText += `• *رقم الجوال:* ${phone}\n`;
+    rawText += `• *نوع المشروع:* ${type}\n`;
+    if (area) rawText += `• *المساحة التقديرية:* ${area} م²\n`;
+    if (district) rawText += `• *الحي / الموقع:* ${district}\n`;
+    if (notes) rawText += `• *تفاصيل إضافية:* ${notes}\n`;
     
-    window.open(`https://wa.me/966555439543?text=${msg}`, '_blank');
+    const encodedMsg = encodeURIComponent(rawText);
+    window.open(`https://wa.me/966555439543?text=${encodedMsg}`, '_blank');
   });
 }
 
 
 
-// ==========================================================================
-// NESMA SCROLLYTELLING RIYADH MAP INTERSECTION OBSERVER
-// Activates matching district polygon as user scrolls through project cards
-// ==========================================================================
-function initNesmaScrollytelling() {
-  const projectItems = document.querySelectorAll('.scrolly-project-item');
-  const sectors = document.querySelectorAll('.riyadh-vector-map .r-sector');
-  const badgeName = document.getElementById('activeDistrictName');
 
-  const sectorNames = {
-    'sec-north': 'شمال الرياض (حي النرجس والياسمين)',
-    'sec-northwest': 'شمال غرب الرياض (حي الملقا وحطين)',
-    'sec-west': 'غرب الرياض (بوابة الدرعية)',
-    'sec-center': 'وسط الرياض (طريق الملك فهد والعليا)',
-    'sec-east': 'شرق الرياض (ضاحية الفرسان واليرموك)',
-    'sec-south': 'جنوب الرياض (حي ديراب والمناطق اللوجستية)'
-  };
-
-  if (!projectItems.length || !sectors.length) return;
-
-  // Set default initial state
-  const firstSector = projectItems[0].getAttribute('data-sector');
-  if (firstSector) {
-    const el = document.getElementById(firstSector);
-    if (el) el.classList.add('active-sector');
-  }
-
-  // Use IntersectionObserver with comfortable focal zone
-  const observerOptions = {
-    root: null,
-    rootMargin: '-25% 0px -40% 0px',
-    threshold: 0.15
-  };
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const targetSector = entry.target.getAttribute('data-sector');
-        if (!targetSector) return;
-
-        // Clear all active sectors
-        sectors.forEach(s => s.classList.remove('active-sector'));
-
-        // Highlight matching sector
-        const targetEl = document.getElementById(targetSector);
-        if (targetEl) {
-          targetEl.classList.add('active-sector');
-        }
-
-        // Update district name badge
-        if (badgeName && sectorNames[targetSector]) {
-          badgeName.textContent = sectorNames[targetSector];
-        }
-      }
-    });
-  }, observerOptions);
-
-  projectItems.forEach(item => observer.observe(item));
-
-  // Interactive click on map sectors to smooth-scroll to project
-  sectors.forEach(sector => {
-    sector.addEventListener('click', () => {
-      const secId = sector.id;
-      const targetCard = document.querySelector(`.scrolly-project-item[data-sector="${secId}"]`);
-      if (targetCard) {
-        targetCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }
-    });
-  });
-}
-
-document.addEventListener('DOMContentLoaded', initNesmaScrollytelling);
 
 
 
 // ==========================================================================
 // REAL RIYADH MAP SCROLLYTELLING & PIECE ENLARGEMENT
 // ==========================================================================
-function initNesmaScrollytelling() {
+function initProjectMapScroll() {
   const projectItems = document.querySelectorAll('.scrolly-project-item');
   const sectors = document.querySelectorAll('.riyadh-real-map-svg .map-piece');
   const badgeName = document.getElementById('activeDistrictName');
@@ -315,7 +245,7 @@ function initNesmaScrollytelling() {
   });
 }
 
-document.addEventListener('DOMContentLoaded', initNesmaScrollytelling);
+document.addEventListener('DOMContentLoaded', initProjectMapScroll);
 
 
 
@@ -348,7 +278,7 @@ function initHeroTextRotator() {
 
 
 
-/* Nesma-Style Splash Screen Dismissal */
+/* Atyaf Al-Bayad Architecture Splash Screen Dismissal */
 function initSplashScreen() {
   const splash = document.getElementById('siteSplashScreen');
   if (!splash) return;
@@ -677,13 +607,7 @@ function openCorporateModal(title, contentHtml) {
 }
 
 function initToastAndModals() {
-  // English Switcher
-  document.querySelectorAll('.js-lang-switch').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      showToast('النسخة الإنجليزية قيد التطوير والاعتماد الرسمي | English version is under development');
-    });
-  });
+
 
   // Privacy Policy Modal
   document.querySelectorAll('.js-open-privacy').forEach(link => {
